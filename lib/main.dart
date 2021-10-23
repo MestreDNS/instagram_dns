@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'src/instagram_dns.dart';
+import 'package:instagram/src/my_material_app.dart';
 
 void main() {
-  runApp(const InstagramDNS());
+  runApp(const MyMaterialApp());
 }
