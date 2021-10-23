@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'splash_page.dart';
+import 'components/template/splash_page.dart';
 
 class InstagramDNS extends StatelessWidget {
   const InstagramDNS({Key? key}) : super(key: key);
