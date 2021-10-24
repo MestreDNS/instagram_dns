@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/src/components/organisms/footer.dart';
+import 'package:instagram/src/components/organisms/bottom_navigation_bar_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,8 +11,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: Footer().getFooter(),
+    return const Scaffold(
+      bottomNavigationBar: BNB(),
     );
   }
 }
