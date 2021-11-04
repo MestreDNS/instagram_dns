@@ -5,14 +5,15 @@ class FeedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 128,
-      width: 128,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           title("mage_cat"),
-          image("mage_cat"),
+          const SizedBox(height: 8.0),
+          image("mage_cat", screenWidth),
+          actions(),
         ],
       ),
     );
@@ -20,15 +21,58 @@ class FeedItem extends StatelessWidget {
 
   Row title(String username) {
     return Row(
-      mainAxisSize: MainAxisSize.min,
       children: [
-        Image(image: AssetImage("assets/images/profiles/$username.jpg")),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: CircleAvatar(
+            backgroundImage: AssetImage("assets/images/profiles/$username.jpg"),
+            radius: 16.0,
+          ),
+        ),
         Text(username)
       ],
     );
   }
 
-  Image image(String username) {
-    return Image(image: AssetImage("assets/images/profiles/$username.jpg"));
+  Image image(String username, double _screenWidth) {
+    return Image(
+      image: AssetImage("assets/images/profiles/$username.jpg"),
+      width: _screenWidth,
+      fit: BoxFit.fitWidth,
+    );
+  }
+
+  Padding actions() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: () {},
+            icon: Image.asset(
+              "assets/instagram/white/instagram_heart_pano_outline_24.png",
+              width: 24.0,
+              height: 24.0,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Image.asset(
+              "assets/instagram/white/instagram_new_post_pano_outline_24.png",
+              width: 24.0,
+              height: 24.0,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Image.asset(
+              "assets/instagram/white/instagram_app_messenger_pano_outline_24.png",
+              width: 24.0,
+              height: 24.0,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

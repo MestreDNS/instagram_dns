@@ -12,8 +12,6 @@ class _FeedState extends State<Feed> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
-      width: 100,
       child: builderListView(),
     );
   }
@@ -22,6 +20,7 @@ class _FeedState extends State<Feed> {
     return ListView(
       shrinkWrap: true,
       children: const [
+        FeedItem(),
         FeedItem(),
       ],
     );
