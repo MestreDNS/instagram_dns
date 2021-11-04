@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "username": "mestre_dns",
+            "name": "MestreDNS",
+            "viewed_shorts": false
+        },
+        {
+            "username": "mage_cat",
+            "name": "The Mage Cat Reads Your Mind",
+            "viewed_shorts": false
+        },
+        {
+            "username": "loginn",
+            "name": "Cardoso",
+            "viewed_shorts": false
+        }
+    ]
+}
