@@ -2,4 +2,4 @@
 
 Este projeto é uma clonagem da interface do instagram
 
-![](demo.gif)
+![](demo_low.gif)
