@@ -9,7 +9,6 @@
 .buildlog/
 .history
 .svn/
-.gitignore
 .gitignore.old
 
 # IntelliJ related
