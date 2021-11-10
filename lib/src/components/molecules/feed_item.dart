@@ -1,19 +1,29 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:instagram/src/theme/colors.dart';
 
 class FeedItem extends StatelessWidget {
-  const FeedItem({Key? key}) : super(key: key);
+  final String username;
+  final String imagePostPath;
+
+  const FeedItem(this.username, this.imagePostPath, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
-          title("mage_cat"),
+          title(username),
           const SizedBox(height: 8.0),
-          image("mage_cat", screenWidth),
+          image(imagePostPath, screenWidth),
           actions(),
+          likedBy(["mestre_dns", "loginn", "syscheater"], screenWidth),
+          const SizedBox(height: 4.0),
+          newComment(screenWidth),
+          const SizedBox(height: 24.0),
         ],
       ),
     );
@@ -24,9 +34,23 @@ class FeedItem extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: CircleAvatar(
-            backgroundImage: AssetImage("assets/images/profiles/$username.jpg"),
-            radius: 16.0,
+          child: Container(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: MyThemeColors.storyBorderColor2,
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+              ),
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(2.0),
+              child: CircleAvatar(
+                backgroundImage:
+                    AssetImage("assets/images/profiles/$username.jpg"),
+                radius: 16.0,
+              ),
+            ),
           ),
         ),
         Text(username)
@@ -34,9 +58,9 @@ class FeedItem extends StatelessWidget {
     );
   }
 
-  Image image(String username, double _screenWidth) {
+  Image image(String _imagePath, double _screenWidth) {
     return Image(
-      image: AssetImage("assets/images/profiles/$username.jpg"),
+      image: AssetImage(_imagePath),
       width: _screenWidth,
       fit: BoxFit.fitWidth,
     );
@@ -44,33 +68,110 @@ class FeedItem extends StatelessWidget {
 
   Padding actions() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            onPressed: () {},
-            icon: Image.asset(
-              "assets/instagram/white/instagram_heart_pano_outline_24.png",
-              width: 24.0,
-              height: 24.0,
+          Row(
+            children: [
+              feedIcon(
+                "assets/instagram/white/instagram_heart_pano_outline_24.png",
+              ),
+              feedIcon(
+                "assets/instagram/white/instagram_comment_pano_outline_24.png",
+              ),
+              feedIcon(
+                "assets/instagram/white/instagram_direct_pano_outline_24.png",
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              feedIcon(
+                "assets/instagram/white/instagram_save_pano_outline_24.png",
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  IconButton feedIcon(String _imagePath) {
+    return IconButton(
+      constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+      onPressed: () {},
+      icon: Image.asset(
+        _imagePath,
+        width: 24.0,
+        height: 24.0,
+      ),
+    );
+  }
+
+  Container likedBy(List<String> _users, double _screenWidth) {
+    final Random otherViewed = Random();
+    int otherViewedCount = 0;
+    final bool otherViewedBool = otherViewed.nextBool();
+    if (otherViewedBool) {
+      otherViewedCount = otherViewed.nextInt(200);
+    }
+    final StringBuffer _textBuffer = StringBuffer("Curtido por ");
+    int _index = 0;
+    for (final String _user in _users) {
+      _textBuffer.write(_user);
+      if (_index == _users.length - 1) {
+        break;
+      } else if (_users.length == 1) {
+        break;
+      } else if (_index == _users.length - 2) {
+        if (!otherViewedBool) {
+          _textBuffer.write(" e ");
+        } else {
+          _textBuffer.write(", ");
+        }
+      } else {
+        _textBuffer.write(", ");
+      }
+      _index++;
+    }
+    if (otherViewedBool) {
+      _textBuffer.write(" e outras $otherViewedCount pessoas");
+    }
+    return Container(
+      width: _screenWidth,
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: RichText(
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        text: TextSpan(text: _textBuffer.toString()),
+      ),
+    );
+  }
+
+  SizedBox newComment(double _screenWidth) {
+    return SizedBox(
+      height: 32,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: CircleAvatar(
+              backgroundImage:
+                  AssetImage("assets/images/profiles/mestre_dns.jpg"),
+              radius: 16.0,
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: Image.asset(
-              "assets/instagram/white/instagram_new_post_pano_outline_24.png",
-              width: 24.0,
-              height: 24.0,
+          Expanded(
+            child: TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                labelText: 'Adicione um comentário...',
+              ),
             ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Image.asset(
-              "assets/instagram/white/instagram_app_messenger_pano_outline_24.png",
-              width: 24.0,
-              height: 24.0,
-            ),
-          ),
+          )
         ],
       ),
     );

@@ -24,10 +24,7 @@ class _ShortsState extends State<Shorts> {
         StoriesItem("mestre_dns", false),
         StoriesItem("loginn", true),
         StoriesItem("mage_cat", false),
-        StoriesItem("system_cheater", true),
-        StoriesItem("mestre_dns", false),
-        StoriesItem("mestre_dns", false),
-        StoriesItem("mestre_dns", true),
+        StoriesItem("system_cheater", false),
       ],
     );
   }

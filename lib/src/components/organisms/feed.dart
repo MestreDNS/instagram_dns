@@ -18,10 +18,12 @@ class _FeedState extends State<Feed> {
 
   Widget builderListView() {
     return ListView(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: const [
-        FeedItem(),
-        FeedItem(),
+        FeedItem("mage_cat", "assets/images/upload/nina.jpg"),
+        FeedItem("loginn", "assets/images/upload/kurumins.jpg"),
+        FeedItem("mestre_dns", "assets/images/upload/me_and_cats.jpg"),
       ],
     );
   }
