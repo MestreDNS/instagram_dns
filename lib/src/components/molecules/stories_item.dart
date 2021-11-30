@@ -25,8 +25,10 @@ class StoriesItem extends StatelessWidget {
                 color: MyThemeColors.black,
               ),
               child: CircleAvatar(
-                backgroundImage:
-                    AssetImage("assets/images/profiles/$username.jpg"),
+                backgroundImage: NetworkImage(
+                  "https://raw.githubusercontent.com/MestreDNS/instagram_dns_accounts/main/profiles/$username.png",
+                ),
+                backgroundColor: Colors.transparent,
                 radius: 72,
               ),
             ),

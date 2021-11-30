@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/src/components/molecules/stories_item.dart';
+import 'package:instagram/src/objects/atual_user.dart';
+import 'package:provider/provider.dart';
 
 class Shorts extends StatefulWidget {
   const Shorts({Key? key}) : super(key: key);
@@ -18,13 +20,14 @@ class _ShortsState extends State<Shorts> {
   }
 
   Widget builderListView() {
+    final String _atualUser = context.read<AtualUser>().username;
     return ListView(
       scrollDirection: Axis.horizontal,
-      children: const [
-        StoriesItem("mestre_dns", false),
-        StoriesItem("loginn", true),
-        StoriesItem("mage_cat", false),
-        StoriesItem("system_cheater", false),
+      children: [
+        StoriesItem(_atualUser, false),
+        const StoriesItem("loginn", true),
+        const StoriesItem("mage_cat", false),
+        const StoriesItem("system_cheater", false),
       ],
     );
   }

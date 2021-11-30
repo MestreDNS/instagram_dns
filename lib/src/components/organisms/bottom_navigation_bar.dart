@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/src/globals.dart';
+import 'package:instagram/src/objects/atual_user.dart';
 import 'package:instagram/src/theme/colors.dart';
+import 'package:provider/provider.dart';
 
 class BNB extends StatefulWidget {
   const BNB({Key? key}) : super(key: key);
@@ -13,6 +16,7 @@ class _BNBState extends State<BNB> {
   List<BottomNavigationBarItem> _bnbItems = [];
 
   void generateBNBItems() {
+    final String _atualUser = context.watch<AtualUser>().username;
     _bnbItems = [
       getBNBItem(
         "assets/instagram/white/instagram_home_pano_outline_24.png",
@@ -30,14 +34,15 @@ class _BNBState extends State<BNB> {
         "assets/instagram/white/instagram_shopping_bag_pano_outline_24.png",
         "assets/instagram/white/instagram_shopping_bag_pano_filled_24.png",
       ),
-      const BottomNavigationBarItem(
+      BottomNavigationBarItem(
         icon: SizedBox(
           height: 32,
           width: 32,
           child: CircleAvatar(
-            backgroundImage: AssetImage(
-              "assets/images/profiles/mestre_dns.jpg",
+            backgroundImage: NetworkImage(
+              "https://raw.githubusercontent.com/MestreDNS/instagram_dns_accounts/main/profiles/$_atualUser.png",
             ),
+            backgroundColor: Colors.transparent,
           ),
         ),
         label: "",

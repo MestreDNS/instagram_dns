@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/src/theme/colors.dart';
 
@@ -46,8 +47,9 @@ class FeedItem extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(2.0),
               child: CircleAvatar(
-                backgroundImage:
-                    AssetImage("assets/images/profiles/$username.jpg"),
+                backgroundImage: NetworkImage(
+                  "https://raw.githubusercontent.com/MestreDNS/instagram_dns_accounts/main/profiles/$username.png",
+                ),
                 radius: 16.0,
               ),
             ),
@@ -154,16 +156,17 @@ class FeedItem extends StatelessWidget {
       height: 32,
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: const [
+        children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: CircleAvatar(
-              backgroundImage:
-                  AssetImage("assets/images/profiles/mestre_dns.jpg"),
+              backgroundImage: NetworkImage(
+                "https://raw.githubusercontent.com/MestreDNS/instagram_dns_accounts/main/profiles/$username.png",
+              ),
               radius: 16.0,
             ),
           ),
-          Expanded(
+          const Expanded(
             child: TextField(
               obscureText: true,
               decoration: InputDecoration(
