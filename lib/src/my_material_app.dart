@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/src/pages/login_page.dart';
+import 'package:instagram/src/pages/sign_in_page.dart';
+import 'package:instagram/src/pages/sign_up_page.dart';
 import 'pages/home_page.dart';
 
 class MyMaterialApp extends StatelessWidget {
@@ -9,7 +12,7 @@ class MyMaterialApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: Brightness.dark),
-      home: const HomePage(),
+      home: const SignInPage(),
     );
   }
 }
