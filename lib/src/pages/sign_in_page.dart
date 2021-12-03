@@ -69,15 +69,16 @@ class _SignInPageState extends State<SignInPage> {
 
   void _donePressed() async {
     final String? newUser = await UserLogin.checkLogin(
-        userTextEditingController.text, passTextEditingController.text);
+      userTextEditingController.text,
+      passTextEditingController.text,
+    );
     if (newUser != null) {
       _loginSuccessfull(newUser);
     }
   }
 
   _loginSuccessfull(String _newUser) {
-    Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (context) => HomePage()), (route) => false);
+    Navigator.pushNamed(context, '/home');
   }
 }
 

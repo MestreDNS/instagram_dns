@@ -27,7 +27,9 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/signUp');
+                },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 48.0),
                 ),
@@ -38,8 +40,12 @@ class _LoginPageState extends State<LoginPage> {
               height: 16,
             ),
             ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(primary: Colors.transparent),
+              onPressed: () {
+                Navigator.pushNamed(context, '/signIn');
+              },
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent,
+                  minimumSize: const Size(double.infinity, 48.0)),
               child: const Text(
                 "Entrar",
                 style: TextStyle(color: Colors.blue),

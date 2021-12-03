@@ -1,7 +1,7 @@
 import 'dart:math';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram/src/objects/atual_user.dart';
+import 'package:instagram/src/objects/user_login.dart';
 import 'package:instagram/src/theme/colors.dart';
 
 class FeedItem extends StatelessWidget {
@@ -161,7 +161,7 @@ class FeedItem extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: CircleAvatar(
               backgroundImage: NetworkImage(
-                "https://raw.githubusercontent.com/MestreDNS/instagram_dns_accounts/main/profiles/$username.png",
+                "https://raw.githubusercontent.com/MestreDNS/instagram_dns_accounts/main/profiles/${AtualUser().username}.png",
               ),
               radius: 16.0,
             ),
