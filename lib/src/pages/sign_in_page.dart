@@ -68,7 +68,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _donePressed() async {
-    final String? newUser = await UserLogin.checkLogin(
+    final String? newUser = await UserLoginObject.checkLogin(
       userTextEditingController.text,
       passTextEditingController.text,
     );

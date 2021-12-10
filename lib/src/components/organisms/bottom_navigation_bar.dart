@@ -40,7 +40,7 @@ class _BNBState extends State<BNB> {
           width: 32,
           child: CircleAvatar(
             backgroundImage: NetworkImage(
-              "https://raw.githubusercontent.com/MestreDNS/instagram_dns_accounts/main/profiles/$_atualUser.png",
+              "https://raw.githubusercontent.com/MestreDNS/instagram_dns_public/main/profiles/$_atualUser.png",
             ),
             backgroundColor: Colors.transparent,
           ),

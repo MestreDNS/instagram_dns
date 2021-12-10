@@ -1,14 +1,13 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:instagram/src/objects/atual_user.dart';
-import 'package:instagram/src/objects/user_login.dart';
 import 'package:instagram/src/theme/colors.dart';
 
 class FeedItem extends StatelessWidget {
   final String username;
-  final String imagePostPath;
+  final int imageTimestamp;
 
-  const FeedItem(this.username, this.imagePostPath, {Key? key})
+  const FeedItem(this.username, this.imageTimestamp, {Key? key})
       : super(key: key);
 
   @override
@@ -17,9 +16,9 @@ class FeedItem extends StatelessWidget {
     return SizedBox(
       child: Column(
         children: [
-          title(username),
+          title(),
           const SizedBox(height: 8.0),
-          image(imagePostPath, screenWidth),
+          image(screenWidth),
           actions(),
           likedBy(["mestre_dns", "loginn", "syscheater"], screenWidth),
           const SizedBox(height: 4.0),
@@ -30,7 +29,7 @@ class FeedItem extends StatelessWidget {
     );
   }
 
-  Row title(String username) {
+  Row title() {
     return Row(
       children: [
         Padding(
@@ -48,7 +47,7 @@ class FeedItem extends StatelessWidget {
               padding: const EdgeInsets.all(2.0),
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
-                  "https://raw.githubusercontent.com/MestreDNS/instagram_dns_accounts/main/profiles/$username.png",
+                  "https://raw.githubusercontent.com/MestreDNS/instagram_dns_public/main/profiles/$username.png",
                 ),
                 radius: 16.0,
               ),
@@ -60,9 +59,11 @@ class FeedItem extends StatelessWidget {
     );
   }
 
-  Image image(String _imagePath, double _screenWidth) {
+  Image image(double _screenWidth) {
     return Image(
-      image: AssetImage(_imagePath),
+      image: NetworkImage(
+        "https://raw.githubusercontent.com/MestreDNS/instagram_dns_public/main/upload/$username/$imageTimestamp.jpg",
+      ),
       width: _screenWidth,
       fit: BoxFit.fitWidth,
     );
@@ -161,7 +162,7 @@ class FeedItem extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: CircleAvatar(
               backgroundImage: NetworkImage(
-                "https://raw.githubusercontent.com/MestreDNS/instagram_dns_accounts/main/profiles/${AtualUser().username}.png",
+                "https://raw.githubusercontent.com/MestreDNS/instagram_dns_public/main/profiles/${AtualUser().username}.png",
               ),
               radius: 16.0,
             ),

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:instagram/src/components/molecules/feed_item.dart';
+import 'package:instagram/src/objects/atual_user.dart';
+import 'package:instagram/src/objects/feed.dart';
+import 'package:provider/src/provider.dart';
 
 class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
@@ -9,22 +13,66 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
+  List<FeedItem> storiesList = [];
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: builderListView(),
+    final String _atualUser = context.read<AtualUser>().username;
+    return FutureBuilder<List<FeedItem>>(
+      future: _getFeed(_atualUser),
+      builder: (BuildContext context, AsyncSnapshot<List<FeedItem>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text("deu erro :("),
+            );
+          } else {
+            return builderListView(snapshot.data);
+          }
+        }
+      },
     );
   }
 
-  Widget builderListView() {
+  Widget builderListView(List<FeedItem>? feedList) {
     return ListView(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      children: const [
-        FeedItem("mage_cat", "assets/images/upload/nina.jpg"),
-        FeedItem("loginn", "assets/images/upload/kurumins.jpg"),
-        FeedItem("mestre_dns", "assets/images/upload/me_and_cats.jpg"),
-      ],
+      children: feedList ??
+          [
+            const Center(
+              child: Text("deu erro :("),
+            )
+          ],
     );
+  }
+
+  Future<List<FeedItem>> _getFeed(String _atualUser) async {
+    List<FeedObject> feedObjectList = [];
+    await FeedObject.fetchFeed(http.Client()).then((x) => feedObjectList = x);
+    storiesList = [];
+    final List<int> sortedTimestamp = [];
+    for (final FeedObject feedObjectItem in feedObjectList) {
+      for (int i = 0; i < feedObjectItem.feedList.length; i++) {
+        sortedTimestamp.add(
+          feedObjectItem.feedList[i],
+        );
+      }
+    }
+    sortedTimestamp.sort();
+    for (int i = 0; i < sortedTimestamp.length; i++) {
+      for (final FeedObject feedObjectItem in feedObjectList) {
+        for (int i2 = 0; i2 < feedObjectItem.feedList.length; i2++) {
+          if (feedObjectItem.feedList[i2] == sortedTimestamp[i]) {
+            storiesList.add(
+              FeedItem(feedObjectItem.username, feedObjectItem.feedList[i2]),
+            );
+            break;
+          }
+        }
+      }
+    }
+    return storiesList;
   }
 }

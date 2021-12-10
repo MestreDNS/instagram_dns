@@ -64,10 +64,10 @@ class _ShortsState extends State<Shorts> {
 
   Future<List<String>> _getUserList() async {
     final List<String> users = [];
-    List<UserLogin> userLoginList = [];
-    await UserLogin.fetchUserLogin(http.Client())
+    List<UserLoginObject> userLoginList = [];
+    await UserLoginObject.fetchUserLogin(http.Client())
         .then((x) => userLoginList = x);
-    for (final UserLogin user in userLoginList) {
+    for (final UserLoginObject user in userLoginList) {
       users.add(user.username);
     }
     return users;
