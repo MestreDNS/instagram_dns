@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram/src/globals.dart';
 import 'package:instagram/src/objects/atual_user.dart';
+import 'package:instagram/src/objects/home_object.dart';
 import 'package:instagram/src/theme/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -86,12 +85,10 @@ class _BNBState extends State<BNB> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         backgroundColor: MyThemeColors.black,
-        currentIndex: Globals.pageIndex,
+        currentIndex: HomeObject().index,
         elevation: 1,
         onTap: (_index) {
-          setState(() {
-            Globals.pageIndex = _index;
-          });
+          context.read<HomeObject>().updateIndex(_index);
         },
       ),
     );

@@ -13,7 +13,7 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
-  List<FeedItem> storiesList = [];
+  List<FeedItem> feedList = [];
   @override
   Widget build(BuildContext context) {
     final String _atualUser = context.read<AtualUser>().username;
@@ -51,7 +51,7 @@ class _FeedState extends State<Feed> {
   Future<List<FeedItem>> _getFeed(String _atualUser) async {
     List<FeedObject> feedObjectList = [];
     await FeedObject.fetchFeed(http.Client()).then((x) => feedObjectList = x);
-    storiesList = [];
+    feedList = [];
     final List<int> sortedTimestamp = [];
     for (final FeedObject feedObjectItem in feedObjectList) {
       for (int i = 0; i < feedObjectItem.feedList.length; i++) {
@@ -65,7 +65,7 @@ class _FeedState extends State<Feed> {
       for (final FeedObject feedObjectItem in feedObjectList) {
         for (int i2 = 0; i2 < feedObjectItem.feedList.length; i2++) {
           if (feedObjectItem.feedList[i2] == sortedTimestamp[i]) {
-            storiesList.add(
+            feedList.add(
               FeedItem(feedObjectItem.username, feedObjectItem.feedList[i2]),
             );
             break;
@@ -73,6 +73,6 @@ class _FeedState extends State<Feed> {
         }
       }
     }
-    return storiesList;
+    return feedList;
   }
 }

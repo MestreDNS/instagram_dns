@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/src/objects/atual_user.dart';
 import 'package:instagram/src/theme/colors.dart';
+import 'package:provider/provider.dart';
 
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({Key? key}) : super(key: key);
+class AppBarProfile extends StatelessWidget implements PreferredSizeWidget {
+  const AppBarProfile({Key? key}) : super(key: key);
 
   @override
   // TODO: implement preferredSize
@@ -10,14 +12,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String _atualUser = context.read<AtualUser>().username;
     return AppBar(
       backgroundColor: MyThemeColors.black,
       title: Padding(
-        padding: const EdgeInsets.only(left: 0.0, top: 8.0),
-        child: Image.asset(
-          "assets/instagram/logo/nux_dayone_landing_logo.png",
-          height: 32,
-        ),
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Text(_atualUser),
       ),
       actions: [
         IconButton(
@@ -32,14 +32,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {},
           icon: Image.asset(
             "assets/instagram/white/instagram_heart_pano_outline_24.png",
-            width: 24.0,
-            height: 24.0,
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: Image.asset(
-            "assets/instagram/white/instagram_app_messenger_pano_outline_24.png",
             width: 24.0,
             height: 24.0,
           ),
